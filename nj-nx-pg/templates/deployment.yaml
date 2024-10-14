@@ -60,7 +60,7 @@ spec:
         - name: argo-nodejs
           image: dangdang42/k8s-nodejs:v2
           ports:
-            - containerPort: 80
+            - containerPort: 3000
               protocol: TCP
           env:
             - name: DB_HOST
