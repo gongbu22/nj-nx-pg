@@ -4,20 +4,20 @@ kind: Deployment
 metadata:
   name: k8s-postgre13-deploy
   labels:
-    app: postgre13
+    app: k8s-postgre13
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgre13
+      app: k8s-postgre13
   template:
     metadata:
-      name: postgre13
+      name: k8s-postgre13
       labels:
-        app: postgre13
+        app: k8s-postgre13
     spec:
       containers:
-        - name: postgre13
+        - name: k8s-postgre13
           image: postgres:13-alpine3.20
           ports:
             - containerPort: 5432
@@ -44,20 +44,20 @@ kind: Deployment
 metadata:
   name: k8s-nodejs-deploy
   labels:
-    app: nodejs
+    app: k8s-nodejs
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nodejs
+      app: k8s-nodejs
   template:
     metadata:
-      name: nodejs
+      name: k8s-nodejs
       labels:
-        app: nodejs
+        app: k8s-nodejs
     spec:
       containers:
-        - name: nodejs
+        - name: k8s-nodejs
           image: dangdang42/k8s-nodejs:v2
           ports:
             - containerPort: 80
