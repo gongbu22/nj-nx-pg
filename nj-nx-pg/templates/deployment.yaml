@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argo-postgre13-deploy
+  name: k8s-postgre13-deploy
   labels:
-    app: argo-postgre13
+    app: postgre13
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: argo-postgre13
+      app: postgre13
   template:
     metadata:
-      name: argo-postgre13
+      name: postgre13
       labels:
-        app: argo-postgre13
+        app: postgre13
     spec:
       containers:
-        - name: argo-postgre13
+        - name: postgre13
           image: postgres:13-alpine3.20
           ports:
             - containerPort: 5432
@@ -42,26 +42,26 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argo-nodejs-deploy
+  name: k8s-nodejs-deploy
   labels:
-    app: argo-nodejs
+    app: nodejs
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: argo-nodejs
+      app: nodejs
   template:
     metadata:
-      name: argo-nodejs
+      name: nodejs
       labels:
-        app: argo-nodejs
+        app: nodejs
     spec:
       containers:
-        - name: argo-nodejs
+        - name: nodejs
           image: dangdang42/k8s-nodejs:v2
           ports:
             - containerPort: 80
               protocol: TCP
           env:
             - name: DB_HOST
-              value: argo-postgre-svc
+              value: k8s-postgre-svc
