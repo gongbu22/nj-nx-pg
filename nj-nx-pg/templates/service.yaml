@@ -1,0 +1,12 @@
+# postgre
+apiVersion: v1
+kind: Service
+metadata:
+  name: argo-postgre-svc
+spec:
+  selector:
+    app: argo-pstgre13
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
