@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-postgre13-deploy
+  name: argo-postgre13-deploy
   labels:
-    app: k8s-postgre13
+    app: argo-postgre13
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: k8s-postgre13
+      app: argo-postgre13
   template:
     metadata:
-      name: k8s-postgre13
+      name: argo-postgre13
       labels:
-        app: k8s-postgre13
+        app: argo-postgre13
     spec:
       containers:
-        - name: k8s-postgre13
+        - name: argo-postgre13
           image: postgres:13-alpine3.20
           ports:
             - containerPort: 5432
@@ -42,26 +42,59 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-nodejs-deploy
+  name: argo-nodejs-deploy
   labels:
-    app: k8s-nodejs
+    app: argo-nodejs
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: k8s-nodejs
+      app: argo-nodejs
   template:
     metadata:
-      name: k8s-nodejs
+      name: argo-nodejs
       labels:
-        app: k8s-nodejs
+        app: argo-nodejs
     spec:
       containers:
-        - name: k8s-nodejs
+        - name: argo-nodejs
           image: dangdang42/k8s-nodejs:v2
           ports:
             - containerPort: 80
               protocol: TCP
           env:
             - name: DB_HOST
-              value: k8s-postgre-svc
+              value: argo-postgre-svc
+
+---
+# nginx
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argo-njnginx-deploy
+  labels:
+    app: argo-njnginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argo-njnginx
+  template:
+    metadata:
+      name: argo-njnginx
+      labels:
+        app: argo-njnginx
+    spec:
+      containers:
+        - name: argo-njnginx
+          image: nginx
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: njnginx-config
+      volumes:
+        - name: njnginx-config
+          configMap:
+            name: njnginx-config
